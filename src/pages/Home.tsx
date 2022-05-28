@@ -20,8 +20,8 @@ export function Home() {
   }
 
   function handleToggleTaskDone(id: number) {
-    const doneTaskList = tasks.map((e, index) => {
-      if (index === id){
+    const doneTaskList = tasks.map(e => {
+      if (e.id === id){
         e.done = !e.done;
       }
      return e;});
@@ -31,7 +31,7 @@ export function Home() {
   }
 
   function handleRemoveTask(id: number) {
-     const arrayWithoutElement = tasks.filter((_,index) => index !== id);
+     const arrayWithoutElement = tasks.filter(e => e.id !== id);
      setTasks(arrayWithoutElement);
   }
 
