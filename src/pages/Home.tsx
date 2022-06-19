@@ -10,6 +10,13 @@ export function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   function handleAddTask(newTaskTitle: string) {
+
+    const alreadyHasTask = tasks.some(e => e.title === newTaskTitle);
+    if (alreadyHasTask) {
+      Alert.alert('Ops!', 'Tarefa já existe');
+      return;
+    }
+
     const task = {
       id,
       title: newTaskTitle,
@@ -31,8 +38,14 @@ export function Home() {
   }
 
   function handleRemoveTask(id: number) {
-     const arrayWithoutElement = tasks.filter(e => e.id !== id);
-     setTasks(arrayWithoutElement);
+    Alert.alert('Tem certeza?', 'Você tem certeza que deseja remover esta tarefa?'
+    , [
+      {text: 'Sim', onPress: () => {
+        const arrayWithoutElement = tasks.filter(e => e.id !== id);
+        setTasks(arrayWithoutElement);
+      }},
+      {text: 'Não', onPress: () => {}, style: 'cancel'}
+    ])
   }
 
   return (
